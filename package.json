@@ -78,6 +78,12 @@
     "awilix": "^8.0.1",
     "pg": "^8.13.0"
   },
+  "dependencies": {
+    "@pdfme/common": "^5.3.14",
+    "@pdfme/generator": "^5.3.14",
+    "@pdfme/schemas": "^5.3.14",
+    "@pdfme/ui": "^5.3.14"
+  },
   "engines": {
     "node": ">=20"
   },

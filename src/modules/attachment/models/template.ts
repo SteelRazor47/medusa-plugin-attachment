@@ -6,7 +6,6 @@ const PdfTemplateModel = model.define("attachment-pdf-template", {
     handle: model.text().unique(),
     name: model.text(),
     template: model.json(),
-    pdfmeVersion: model.text(),
 })
 
 export default PdfTemplateModel

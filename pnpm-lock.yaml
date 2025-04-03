@@ -21,6 +21,9 @@ importers:
         specifier: ^5.3.14
         version: 5.3.15(@pdfme/common@5.3.15(antd@5.24.6(date-fns@4.1.0)(luxon@3.6.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(form-render@2.5.2(@types/react@18.3.20)(antd@5.24.6(date-fns@4.1.0)(luxon@3.6.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(react-dom@16.14.0(react@16.14.0))(react@16.14.0)))(@pdfme/schemas@5.3.15(@pdfme/common@5.3.15(antd@5.24.6(date-fns@4.1.0)(luxon@3.6.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(form-render@2.5.2(@types/react@18.3.20)(antd@5.24.6(date-fns@4.1.0)(luxon@3.6.1)(react-dom@16.14.0(react@16.14.0))(react@16.14.0))(react-dom@16.14.0(react@16.14.0))(react@16.14.0))))(@types/react@18.3.20)(date-fns@4.1.0)(luxon@3.6.1)
     devDependencies:
+      '@hookform/resolvers':
+        specifier: ^3.4.2
+        version: 3.4.2(react-hook-form@7.49.1(react@18.3.1))
       '@medusajs/admin-sdk':
         specifier: 2.6.2-snapshot-20250310153842
         version: 2.6.2-snapshot-20250310153842
@@ -87,12 +90,24 @@ importers:
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
+      radix-ui:
+        specifier: ^1.1.2
+        version: 1.1.2(@types/react-dom@18.3.6(@types/react@18.3.20))(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: ^18.2.0
         version: 18.3.1
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      react-hook-form:
+        specifier: ^7.49.1
+        version: 7.49.1(react@18.3.1)
+      react-i18next:
+        specifier: ^13.5.0
+        version: 13.5.0(i18next@23.7.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.20.1
+        version: 6.20.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ts-node:
         specifier: ^10.9.2
         version: 10.9.2(@swc/core@1.5.7(@swc/helpers@0.5.15))(@types/node@20.17.30)(typescript@5.8.2)
@@ -105,6 +120,9 @@ importers:
       yalc:
         specifier: ^1.0.0-pre.53
         version: 1.0.0-pre.53
+      zod:
+        specifier: ^3.22.4
+        version: 3.22.4
 
 packages:
 

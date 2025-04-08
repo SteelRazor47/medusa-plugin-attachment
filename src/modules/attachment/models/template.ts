@@ -1,4 +1,3 @@
-import { InferTypeOf } from "@medusajs/framework/types"
 import { model } from "@medusajs/framework/utils"
 
 const PdfTemplateModel = model.define("attachment-pdf-template", {

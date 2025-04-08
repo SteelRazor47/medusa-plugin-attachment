@@ -101,7 +101,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                             )}
 
                             <div className="flex flex-col gap-y-4">
-                                <Heading level="h2">Base pdf</Heading>
+                                <Heading level="h2">{t("basePdf")}</Heading>
                                 <div className="grid grid-cols-6 gap-4">
 
                                     <Form.Field
@@ -110,7 +110,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Top padding</Form.Label>
+                                                    <Form.Label>{t("topPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -134,7 +134,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Right padding</Form.Label>
+                                                    <Form.Label>{t("rightPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -158,7 +158,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Bottom padding</Form.Label>
+                                                    <Form.Label>{t("bottomPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -182,7 +182,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Left padding</Form.Label>
+                                                    <Form.Label>{t("leftPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -206,7 +206,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Width</Form.Label>
+                                                    <Form.Label>{t("width")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -230,7 +230,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Height</Form.Label>
+                                                    <Form.Label>{t("height")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -252,7 +252,7 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                             </div>
 
                             <div className="flex flex-col gap-y-4">
-                                <Heading level="h2">Designer</Heading>
+                                <Heading level="h2">{t("designer")}</Heading>
                                 <Container className="overflow-hidden p-0">
                                     <PDFDesigner
                                         ref={designerRef}

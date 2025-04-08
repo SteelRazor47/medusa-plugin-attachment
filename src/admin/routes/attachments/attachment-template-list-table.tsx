@@ -44,7 +44,7 @@ const useColumns = () => {
   const handleDelete = async (attachment: AttachmentTemplate) => {
     const res = await prompt({
       title: t("general.areYouSure"),
-      description: t("categories.delete.confirmation", {
+      description: t("delete.confirmation", {
         name: attachment.name,
       }),
       confirmText: t("actions.delete"),
@@ -58,7 +58,7 @@ const useColumns = () => {
     await mutateAsync(attachment.id, {
       onSuccess: () => {
         toast.success(
-          t("categories.delete.successToast", {
+          t("delete.successToast", {
             name: attachment.name,
           })
         )
@@ -76,19 +76,16 @@ const useColumns = () => {
   return useMemo(
     () => [
       columnHelper.accessor("name", {
-        header: "Name",
+        header: t("name"),
         // Enables sorting for the column.
         enableSorting: true,
-        // If omitted, the header will be used instead if it's a string, 
-        // otherwise the accessor key (id) will be used.
-        sortLabel: "Name",
         // If omitted the default value will be "A-Z"
         sortAscLabel: "A-Z",
         // If omitted the default value will be "Z-A"
         sortDescLabel: "Z-A",
       }),
       columnHelper.accessor("handle", {
-        header: "Handle",
+        header: t("handle"),
         // cell: ({ getValue }) => {
         //   const status = getValue()
         //   return (
@@ -205,12 +202,20 @@ const AttachmentTemplateListTable = () => {
     },
   })
 
+  const paginationTranslations = {
+    of: t("general.of"),
+    results: t("general.results"),
+    pages: t("general.pages"),
+    prev: t("general.prev"),
+    next: t("general.next"),
+  }
+
   return (
     <Container>
       <DataTable instance={table}>
         <DataTable.Toolbar className="flex flex-col items-start justify-between gap-2 md:flex-row md:items-center">
           {/* TODO: translate */}
-          <Heading>Attachment templates</Heading>
+          <Heading>{t("attachmentTemplates")}</Heading>
           <div className="flex gap-2">
             {/* <DataTable.FilterMenu tooltip="Filter" /> */}
             <DataTable.SortingMenu tooltip={t("filters.sortLabel")} />
@@ -223,7 +228,7 @@ const AttachmentTemplateListTable = () => {
           </div>
         </DataTable.Toolbar>
         <DataTable.Table />
-        <DataTable.Pagination />
+        <DataTable.Pagination translations={paginationTranslations} />
       </DataTable>
     </Container>
   )

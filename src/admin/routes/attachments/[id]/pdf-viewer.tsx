@@ -32,7 +32,6 @@ const PDFViewer = ({ template }: { template: Template }) => {
         // Only create the designer if it doesn't already exist
         if (viewerRef.current && !viewerInstanceRef.current) {
             // Initialize the Designer
-            console.log(order)
             viewerInstanceRef.current = new Viewer({
                 domContainer: viewerRef.current,
                 template: template,

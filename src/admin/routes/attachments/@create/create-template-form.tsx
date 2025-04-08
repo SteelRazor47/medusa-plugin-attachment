@@ -121,7 +121,7 @@ export const CreateTemplateForm = () => {
                     <div className="flex flex-1 flex-col items-center overflow-y-auto">
                         <div className="flex w-full flex-col gap-y-4 px-2 py-16">
                             <div>
-                                <Heading>Base pdf:</Heading>
+                                <Heading>{t("basePdf")}</Heading>
                                 {/* <Text size="small" className="text-ui-fg-subtle">
                                     {t("users.inviteUserHint")}
                                 </Text> */}
@@ -145,7 +145,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Top padding</Form.Label>
+                                                    <Form.Label>{t("topPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -169,7 +169,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Right padding</Form.Label>
+                                                    <Form.Label>{t("rightPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -193,7 +193,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Bottom padding</Form.Label>
+                                                    <Form.Label>{t("bottomPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -217,7 +217,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Left padding</Form.Label>
+                                                    <Form.Label>{t("leftPadding")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -241,7 +241,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Width</Form.Label>
+                                                    <Form.Label>{t("width")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -265,7 +265,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field: { onChange, ...field } }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Height</Form.Label>
+                                                    <Form.Label>{t("height")}</Form.Label>
                                                     <Form.Control>
                                                         <Input
                                                             onChange={(e) => {
@@ -289,7 +289,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Handle</Form.Label>
+                                                    <Form.Label>{t("handle")}</Form.Label>
                                                     <Form.Control>
                                                         <Input {...field} />
                                                     </Form.Control>
@@ -304,7 +304,7 @@ export const CreateTemplateForm = () => {
                                         render={({ field }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Name</Form.Label>
+                                                    <Form.Label>{t("name")}</Form.Label>
                                                     <Form.Control>
                                                         <Input {...field} />
                                                     </Form.Control>
@@ -327,7 +327,7 @@ export const CreateTemplateForm = () => {
                                 </div> */}
                             </div>
                             <div className="flex flex-col gap-y-4">
-                                <Heading level="h2">Designer</Heading>
+                                <Heading level="h2">{t("designer")}</Heading>
                                 <Container className="overflow-hidden p-0">
                                     <PDFDesigner
                                         ref={designerRef}

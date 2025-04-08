@@ -3,7 +3,7 @@ import PdfTemplateModel from "./models/template";
 import AttachmentModuleService from "./service"
 import { Module } from "@medusajs/framework/utils"
 
-export type PdfTemplate = InferTypeOf<typeof PdfTemplateModel> 
+export type PdfTemplate = InferTypeOf<typeof PdfTemplateModel>
 
 declare module "@medusajs/framework/types" {
     interface ModuleImplementations {

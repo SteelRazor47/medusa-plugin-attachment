@@ -73,7 +73,7 @@ export const EditAttachmentForm = ({ attachment }: { attachment: AttachmentTempl
                     <div className="flex flex-1 flex-col items-center overflow-y-auto">
                         <div className="flex w-full flex-col gap-y-4 px-2 py-16">
                             <div>
-                                <Heading>Base pdf:</Heading>
+                                <Heading>{t("basePdf")}</Heading>
                                 {/* <Text size="small" className="text-ui-fg-subtle">
                                     {t("users.inviteUserHint")}
                                 </Text> */}
@@ -97,7 +97,7 @@ export const EditAttachmentForm = ({ attachment }: { attachment: AttachmentTempl
                                         render={({ field }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Handle</Form.Label>
+                                                    <Form.Label>{t("handle")}</Form.Label>
                                                     <Form.Control>
                                                         <Input {...field} />
                                                     </Form.Control>
@@ -112,7 +112,7 @@ export const EditAttachmentForm = ({ attachment }: { attachment: AttachmentTempl
                                         render={({ field }) => {
                                             return (
                                                 <Form.Item>
-                                                    <Form.Label>Name</Form.Label>
+                                                    <Form.Label>{t("name")}</Form.Label>
                                                     <Form.Control>
                                                         <Input {...field} />
                                                     </Form.Control>

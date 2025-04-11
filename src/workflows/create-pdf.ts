@@ -1,6 +1,6 @@
 import { Attachment } from "@medusajs/framework/types"
 import { createStep, createWorkflow, StepResponse, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
-import { PDF_TEMPLATE_MODULE, PdfTemplate } from "../modules/attachment"
+import { ATTACHMENT_MODULE, PdfTemplate } from "../modules/attachment"
 import { builtInPlugins, image, multiVariableText, table } from "@pdfme/schemas"
 import { generate } from "@pdfme/generator"
 
@@ -15,8 +15,8 @@ type CreatePdfAttachmentWorkflowInput = {
 const retrieveTemplateStep = createStep(
     "retrieve-template",
     async ({ handle }: { handle: string }, { container }) => {
-        const pdfTemplateService = container.resolve(PDF_TEMPLATE_MODULE)
-        const [template = undefined] = await pdfTemplateService.listPdfTemplates({ handle })
+        const attachmentModule = container.resolve(ATTACHMENT_MODULE)
+        const [template = undefined] = await attachmentModule.listPdfTemplates({ handle })
         if (!template) {
             throw new Error(`Attachment template with handle ${handle} not found`)
         }

@@ -5,9 +5,12 @@ import { EditAttachmentForm } from "./edit-attachment-form"
 import { useQuery } from "@tanstack/react-query"
 import { AttachmentTemplate } from "../../attachment-template-list-table"
 import { sdk } from "../../../../lib/sdk"
+import { Heading } from "@medusajs/ui"
+import { useTranslation } from "react-i18next"
 
 const AttachmentEdit = () => {
   const { id } = useParams()
+  const { t } = useTranslation()
 
   // const { product, isLoading, isError, error } = useProduct(id!, {
   //   fields: PRODUCT_DETAIL_FIELDS,
@@ -26,14 +29,14 @@ const AttachmentEdit = () => {
 
   return (
     <RouteDrawer>
-      {/* <RouteDrawer.Header>
+      <RouteDrawer.Header>
         <RouteDrawer.Title asChild>
-          <Heading>{t("products.edit.header")}</Heading>
+          <Heading>{t("template")}</Heading>
         </RouteDrawer.Title>
         <RouteDrawer.Description className="sr-only">
-          {t("products.edit.description")}
+          {t("edit.description")}
         </RouteDrawer.Description>
-      </RouteDrawer.Header> */}
+      </RouteDrawer.Header>
       {!isLoading && attachment && <EditAttachmentForm attachment={attachment} />}
     </RouteDrawer>
   )

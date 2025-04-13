@@ -9,13 +9,13 @@ import { useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 import * as zod from "zod"
 import { Form } from "../../../../components/form"
-import { RouteFocusModal } from "../../../../components/modals/route-focus-modal"
 import { KeyboundForm } from "../../../../components/utilities/keybound-form"
 import { useMutation, UseMutationOptions, useQueryClient } from "@tanstack/react-query"
 import { sdk } from "../../../../lib/sdk"
 import { FetchError } from "@medusajs/js-sdk"
 import { useRouteModal } from "../../../../components/modals/route-modal-provider/use-route-modal"
 import { AttachmentTemplate } from "../../attachment-template-list-table"
+import { RouteDrawer } from "../../../../components/modals/route-drawer"
 
 const EditAttachmentSchema = zod.object({
     name: zod.string(),
@@ -63,77 +63,73 @@ export const EditAttachmentForm = ({ attachment }: { attachment: AttachmentTempl
     // }
 
     return (
-        <RouteFocusModal.Form form={form}>
+        <RouteDrawer.Form form={form}>
             <KeyboundForm
                 onSubmit={handleSubmit}
                 className="flex h-full flex-col overflow-hidden"
             >
-                <RouteFocusModal.Header />
-                <RouteFocusModal.Body className="flex flex-1 flex-col overflow-hidden">
-                    <div className="flex flex-1 flex-col items-center overflow-y-auto">
-                        <div className="flex w-full flex-col gap-y-4 px-2 py-16">
-                            <div>
-                                <Heading>{t("basePdf")}</Heading>
-                                {/* <Text size="small" className="text-ui-fg-subtle">
+                <RouteDrawer.Body className="flex flex-1 flex-col gap-y-4 overflow-auto">
+
+                    <div>
+                        <Heading>{t("basePdf")}</Heading>
+                        {/* <Text size="small" className="text-ui-fg-subtle">
                                     {t("users.inviteUserHint")}
                                 </Text> */}
-                            </div>
+                    </div>
 
-                            {form.formState.errors.root && (
-                                <Alert
-                                    variant="error"
-                                    dismissible={false}
-                                    className="text-balance"
-                                >
-                                    {form.formState.errors.root.message}
-                                </Alert>
-                            )}
+                    {form.formState.errors.root && (
+                        <Alert
+                            variant="error"
+                            dismissible={false}
+                            className="text-balance"
+                        >
+                            {form.formState.errors.root.message}
+                        </Alert>
+                    )}
 
-                            <div className="flex flex-col gap-y-4">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <Form.Field
-                                        control={form.control}
-                                        name="handle"
-                                        render={({ field }) => {
-                                            return (
-                                                <Form.Item>
-                                                    <Form.Label>{t("handle")}</Form.Label>
-                                                    <Form.Control>
-                                                        <Input {...field} />
-                                                    </Form.Control>
-                                                    <Form.ErrorMessage />
-                                                </Form.Item>
-                                            )
-                                        }}
-                                    />
-                                    <Form.Field
-                                        control={form.control}
-                                        name="name"
-                                        render={({ field }) => {
-                                            return (
-                                                <Form.Item>
-                                                    <Form.Label>{t("name")}</Form.Label>
-                                                    <Form.Control>
-                                                        <Input {...field} />
-                                                    </Form.Control>
-                                                    <Form.ErrorMessage />
-                                                </Form.Item>
-                                            )
-                                        }}
-                                    />
+                    <div className="flex flex-col gap-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                            <Form.Field
+                                control={form.control}
+                                name="handle"
+                                render={({ field }) => {
+                                    return (
+                                        <Form.Item>
+                                            <Form.Label>{t("handle")}</Form.Label>
+                                            <Form.Control>
+                                                <Input {...field} />
+                                            </Form.Control>
+                                            <Form.ErrorMessage />
+                                        </Form.Item>
+                                    )
+                                }}
+                            />
+                            <Form.Field
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => {
+                                    return (
+                                        <Form.Item>
+                                            <Form.Label>{t("name")}</Form.Label>
+                                            <Form.Control>
+                                                <Input {...field} />
+                                            </Form.Control>
+                                            <Form.ErrorMessage />
+                                        </Form.Item>
+                                    )
+                                }}
+                            />
 
-                                </div>
-                            </div>
                         </div>
                     </div>
-                </RouteFocusModal.Body>
-                <RouteFocusModal.Footer>
+                </RouteDrawer.Body>
+                <RouteDrawer.Footer>
                     <div className="flex items-center justify-end gap-x-2">
-                        <RouteFocusModal.Close asChild>
+                        <RouteDrawer.Close asChild>
                             <Button size="small" variant="secondary">
                                 {t("actions.cancel")}
                             </Button>
-                        </RouteFocusModal.Close>
+                        </RouteDrawer.Close>
                         <Button
                             size="small"
                             variant="primary"
@@ -143,9 +139,9 @@ export const EditAttachmentForm = ({ attachment }: { attachment: AttachmentTempl
                             {t("actions.edit")}
                         </Button>
                     </div>
-                </RouteFocusModal.Footer>
+                </RouteDrawer.Footer>
             </KeyboundForm>
-        </RouteFocusModal.Form>
+        </RouteDrawer.Form>
     )
 }
 

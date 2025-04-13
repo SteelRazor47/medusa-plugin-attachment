@@ -15,5 +15,8 @@
     "delete": {
         "confirmation": "Stai per eliminare il template {{name}}. Questa azione non può essere annullata.",
         "successToast": "Template {{name}} eliminata con successo."
+    },
+    "edit": {
+        "description": "Modifica il template PDF."
     }
 }

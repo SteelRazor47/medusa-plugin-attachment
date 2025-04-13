@@ -55,6 +55,17 @@
                 "confirmation",
                 "successToast"
             ]
+        },
+        "edit": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description"
+            ]
         }
     },
     "required": [
@@ -71,7 +82,8 @@
         "name",
         "designer",
         "template",
-        "delete"
+        "delete",
+        "edit"
     ],
     "additionalProperties": false
 }

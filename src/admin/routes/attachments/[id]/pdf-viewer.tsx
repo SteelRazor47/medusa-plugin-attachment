@@ -4,6 +4,7 @@ import { Template } from '@pdfme/common';
 import { image, builtInPlugins, table, multiVariableText } from '@pdfme/schemas';
 import { sdk } from '../../../lib/sdk';
 import { useQuery } from '@tanstack/react-query';
+import { NestedRecord } from './page';
 
 const DEFAULT_PROPERTIES = [
     "id",
@@ -57,7 +58,7 @@ const DEFAULT_RELATIONS = [
 
 const DEFAULT_FIELDS = `${DEFAULT_PROPERTIES.join(",")},${DEFAULT_RELATIONS.join(",")}`
 
-const PDFViewer = ({ template }: { template: Template }) => {
+const PDFViewer = ({ template, data }: { template: Template, data: NestedRecord<string, string | string[][]> }) => {
     const viewerRef = useRef(null);
     const viewerInstanceRef = useRef<Viewer | null>(null);
 
@@ -74,27 +75,16 @@ const PDFViewer = ({ template }: { template: Template }) => {
         }
     }, [template]);
 
-    const { data: { order } = {} } = useQuery({
-        queryFn: async () => {
-            const id = await sdk.admin.order.list().then((res) => res.orders[0].id)
-            return await sdk.admin.order.retrieve(id, { fields: DEFAULT_FIELDS })
-        },
-        queryKey: ["pdfme-order"]
-    })
-
     useEffect(() => {
         // Only create the designer if it doesn't already exist
         if (viewerRef.current && !viewerInstanceRef.current) {
             // Initialize the Designer
-            const items = order?.items.map((item) => [item.title, "" + item.total] as const) ?? []
-            items.push(["Shipping", "" + order?.shipping_total])
-            items.push(["Total", "" + order?.total])
 
             viewerInstanceRef.current = new Viewer({
                 domContainer: viewerRef.current,
                 template: template,
                 plugins,
-                inputs: [{ order, table: items }]
+                inputs: [data]
             });
 
             // Clean up on unmount
@@ -105,7 +95,7 @@ const PDFViewer = ({ template }: { template: Template }) => {
                 }
             };
         }
-    }, [template, order]);
+    }, [template, data]);
 
     // // Function to get the current template
     // const getTemplate = () => {

@@ -5,6 +5,7 @@ const PdfTemplateModel = model.define("attachment-pdf-template", {
     handle: model.text().unique(),
     name: model.text(),
     template: model.json(),
+    previewData: model.json().default({}),
 })
 
 export default PdfTemplateModel

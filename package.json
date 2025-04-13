@@ -48,10 +48,12 @@
     "@mikro-orm/postgresql": "6.4.3",
     "@swc/core": "1.5.7",
     "@tanstack/react-query": "5.64.2",
+    "@types/lodash": "4.17.16",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.2.25",
     "awilix": "^8.0.1",
+    "lodash": "4.17.21",
     "pg": "^8.13.0",
     "prop-types": "^15.8.1",
     "radix-ui": "^1.1.2",
@@ -80,6 +82,7 @@
     "@mikro-orm/migrations": "6.4.3",
     "@mikro-orm/postgresql": "6.4.3",
     "awilix": "^8.0.1",
+    "lodash": "4.17.21",
     "pg": "^8.13.0"
   },
   "dependencies": {

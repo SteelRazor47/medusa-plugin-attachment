@@ -16,12 +16,15 @@ import { sdk } from "../../lib/sdk"
 import { Link, useNavigate } from "react-router-dom"
 import { PencilSquare, Trash } from "@medusajs/icons"
 import { useTranslation } from "react-i18next"
+import { BlankPdf, Template } from "@pdfme/common"
+import { NestedRecord } from "./[id]/page"
 
 export type AttachmentTemplate = {
   id: string
   handle: string
   name: string
-  template: any
+  template: Template & { basePdf: Extract<Template["basePdf"], BlankPdf> }
+  previewData: NestedRecord<string, string | string[][]>
 }
 const columnHelper = createDataTableColumnHelper<AttachmentTemplate>()
 

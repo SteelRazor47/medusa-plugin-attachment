@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { Viewer } from '@pdfme/ui';
 import { Template } from '@pdfme/common';
-import { image, builtInPlugins, table, multiVariableText } from '@pdfme/schemas';
+import { image, builtInPlugins, table, multiVariableText, barcodes, checkbox, date, dateTime, ellipse, line, radioGroup, rectangle, select, svg, time } from '@pdfme/schemas';
 import { sdk } from '../../../lib/sdk';
 import { useQuery } from '@tanstack/react-query';
 import { NestedRecord } from './page';
@@ -64,9 +64,11 @@ const PDFViewer = ({ template, data }: { template: Template, data: NestedRecord<
 
     const plugins = {
         ...builtInPlugins,
+        ...barcodes,
         Image: image,
         Table: table,
-        multiVariableText
+        multiVariableText,
+        svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
     }
 
     useEffect(() => {

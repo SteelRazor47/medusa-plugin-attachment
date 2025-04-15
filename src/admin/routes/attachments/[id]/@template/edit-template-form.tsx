@@ -256,7 +256,12 @@ export const EditTemplateForm = ({ attachment }: { attachment: AttachmentTemplat
                                 <Container className="overflow-hidden p-0">
                                     <PDFDesigner
                                         ref={designerRef}
-                                        template={{ ...template }} />
+                                        template={{ ...template }}
+                                        onTemplateChanged={template => {
+                                            // TODO: typing
+                                            form.setValue("template", template as any)
+                                        }}
+                                    />
                                 </Container>
                             </div>
                         </div>

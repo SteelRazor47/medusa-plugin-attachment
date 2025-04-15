@@ -1,22 +1,26 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { Designer } from '@pdfme/ui';
 import { Template } from '@pdfme/common';
-import { image, builtInPlugins, table, multiVariableText } from '@pdfme/schemas';
+import { image, builtInPlugins, table, multiVariableText, barcodes, checkbox, date, dateTime, ellipse, line, radioGroup, rectangle, select, svg, time } from '@pdfme/schemas';
+import { Input } from '@medusajs/ui';
 
 
 export interface PDFDesignerRef {
     getTemplate: () => Template;
 }
 
-const PDFDesigner = forwardRef<PDFDesignerRef, { template: Template }>(({ template }, ref) => {
+type PDFDesignerProps = { template: Template, onTemplateChanged?: (template: Template) => void }
+const PDFDesigner = forwardRef<PDFDesignerRef, PDFDesignerProps>(({ template, onTemplateChanged }, ref) => {
     const designerRef = useRef(null);
     const designerInstanceRef = useRef<Designer | null>(null);
 
     const plugins = {
         ...builtInPlugins,
+        ...barcodes,
         Image: image,
         Table: table,
-        multiVariableText
+        multiVariableText,
+        svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
     }
 
     useImperativeHandle(ref, () => ({
@@ -89,6 +93,11 @@ const PDFDesigner = forwardRef<PDFDesignerRef, { template: Template }>(({ templa
 
     return (
         <div>
+            <Input type='file' accept='application/json' onChange={async (e) => {
+                if (e.target.files?.length != 1) return;
+                const template = await loadTemplateFromFile(e.target.files[0])
+                onTemplateChanged?.(template)
+            }} />
             <div style={{ width: '100%', height: '800px' }} ref={designerRef} />
             {/* <button onClick={getTemplate}>Get Template</button>
             <div style={{ width: '100%', height: '800px' }} ref={viewerRef} /> */}
@@ -98,3 +107,22 @@ const PDFDesigner = forwardRef<PDFDesignerRef, { template: Template }>(({ templa
 })
 
 export default PDFDesigner;
+
+
+const loadTemplateFromFile = (path: File) => {
+    return new Promise<Template>((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const fileContent = event.target?.result;
+            if (fileContent) {
+                try {
+                    const template = JSON.parse(fileContent as string);
+                    resolve(template as Template)
+                } catch (error) {
+                    console.error("Error parsing template JSON from file:", error);
+                }
+            }
+        };
+        reader.readAsText(path);
+    })
+}

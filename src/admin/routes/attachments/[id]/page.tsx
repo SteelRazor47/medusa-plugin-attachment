@@ -14,6 +14,7 @@ import { Input, Text } from "@medusajs/ui"
 import React, { useEffect, useMemo, useState } from "react"
 import _ from "lodash"
 import { FetchError } from "@medusajs/js-sdk"
+import { getInputFromTemplate } from "@pdfme/common"
 
 export default () => {
     const { id } = useParams<{ id: string }>()
@@ -46,46 +47,18 @@ export default () => {
     })
 
     const template = useMemo(() => {
-        console.log("attachment", attachment?.template)
-        const flatSchemaData = attachment?.template?.schemas.flat(2)
-        const data = flatSchemaData?.reduce((acc, schema) => {
-            if (!schema.content) return acc
+        if (!attachment) return
 
-            if (schema.type === "text") {
-                // extract all keys of the form {foo.bar.baz} from content
-                const regex = /{((?:[A-Za-z0-9-_]\.)*[A-Za-z0-9-_]+)}/g
-                const matches = schema.content.match(regex)
-                if (matches) {
-                    matches.forEach((match) => {
-                        const key = match.replace(/[{}]/g, "")
-                        _.set(acc, key, "")
-                    })
-                }
-            } else if (schema.type === "table") {
-                const table = JSON.parse(schema.content) as string[][]
-                if (!schema.readOnly) {
-                    acc[schema.name] = table
-                } else {
-                    table.flat().forEach((cell) => {
-                        const regex = /{((?:[A-Za-z0-9-_]\.)*[A-Za-z0-9-_]+)}/g
-                        const matches = cell.match(regex)
-                        if (matches) {
-                            matches.forEach((match) => {
-                                const key = match.replace(/[{}]/g, "")
-                                _.set(acc, key, "")
-                            })
-                        }
-                    })
-                }
+        const data = {} as NestedRecord<string, string | string[][]>
+        for (const input of getInputFromTemplate(attachment.template))
+            Object.assign(data, input)
 
-            }
-            return acc
-        }, {} as NestedRecord<string, string | string[][]>)
+        _.assign(data, _.pick(previewData, Object.keys(data)));
 
         if (data)
             setPreviewData(data)
 
-        return attachment?.template
+        return attachment.template
     }, [attachment])
 
     return (
@@ -151,6 +124,23 @@ const TemplateDetails = (template: AttachmentTemplate["template"]) => {
                         children: t("actions.edit"),
                         variant: "secondary",
                     },
+                },
+                {
+                    type: "button",
+                    props: {
+                        children: t("actions.download"),
+                        variant: "secondary",
+                        onClick: () => {
+                            const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+                                JSON.stringify(template)
+                            )}`;
+                            const link = document.createElement("a");
+                            link.href = jsonString;
+                            link.download = "template.json";
+
+                            link.click();
+                        }
+                    },
                 }
             ]} />
             <SectionRow title={t("dimensions")} value={`${template.basePdf.width}x${template.basePdf.height}`} />
@@ -170,7 +160,7 @@ const PreviewData = ({ data, onDataChanged }: React.PropsWithChildren<{ data: Ne
     const { t } = useTranslation()
 
     return (
-        <Container className="overflow-y-auto h-[50vh]">
+        <Container className="overflow-y-auto max-h-[50vh]">
             <Header title={t("previewData")} actions={[
                 // {
                 //     type: "button",

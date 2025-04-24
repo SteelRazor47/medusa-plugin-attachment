@@ -1,5 +1,4 @@
-{
-    "$schema": "./$schema.json",
+export default{
     "attachmentTemplates": "Template allegati",
     "basePdf": "PDF di base",
     "topPadding": "Margine superiore",
@@ -18,5 +17,6 @@
     },
     "edit": {
         "description": "Modifica il template PDF."
-    }
-}
+    },
+    "previewData": "Dati di anteprima"
+} as const

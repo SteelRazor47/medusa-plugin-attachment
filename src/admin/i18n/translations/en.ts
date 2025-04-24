@@ -1,5 +1,6 @@
-{
-    "$schema": "./$schema.json",
+import $schema from "./$schema";
+
+export default {
     "attachmentTemplates": "Attachment templates",
     "basePdf": "Base PDF",
     "topPadding": "Top padding",
@@ -18,5 +19,6 @@
     },
     "edit": {
       "description": "Edit the pdf template."
-    }
-}
+    },
+    "previewData": "Preview data"
+} as const satisfies $schema

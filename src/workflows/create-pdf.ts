@@ -1,7 +1,7 @@
 import { Attachment } from "@medusajs/framework/types"
 import { createStep, createWorkflow, StepResponse, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
 import { ATTACHMENT_MODULE, PdfTemplate } from "../modules/attachment"
-import { builtInPlugins, image, multiVariableText, table } from "@pdfme/schemas"
+import { barcodes, builtInPlugins, checkbox, date, dateTime, ellipse, image, line, multiVariableText, radioGroup, rectangle, select, svg, table, time } from "@pdfme/schemas"
 import { generate } from "@pdfme/generator"
 
 type CreatePdfAttachmentWorkflowInput = {
@@ -26,28 +26,30 @@ const retrieveTemplateStep = createStep(
 
 const plugins = {
     ...builtInPlugins,
+    ...barcodes,
     Image: image,
     Table: table,
-    multiVariableText
+    multiVariableText,
+    svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
 }
 
 const generateContentStep = createStep(
     "generate-content",
     async ({ template, data }: { template: PdfTemplate, data: Record<string, any> }) => {
         const base64Content = await generate({
-            template: template as any,
+            template: template.template as any,
             inputs: [data],
             plugins,
         })
-        return new StepResponse(base64Content)
+        return new StepResponse(Buffer.from(base64Content).toString("base64"))
     }
 )
 
 const createAttachmentStep = createStep(
     "create-attachment",
-    async ({ content, filename, disposition }: { content: Uint8Array, filename: string, disposition: string }) => {
+    ({ content, filename, disposition }: { content: string, filename: string, disposition: string }) => {
         return new StepResponse({
-            content: Buffer.from(content).toString("base64"),
+            content,
             content_type: "application/pdf", // mime type
             filename: filename.endsWith(".pdf") ? filename : `${filename}.pdf`,
             disposition,

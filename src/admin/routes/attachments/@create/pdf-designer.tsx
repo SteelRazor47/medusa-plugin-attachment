@@ -1,8 +1,8 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import { Designer } from '@pdfme/ui';
 import { Template } from '@pdfme/common';
-import { image, builtInPlugins, table, multiVariableText, barcodes, checkbox, date, dateTime, ellipse, line, radioGroup, rectangle, select, svg, time } from '@pdfme/schemas';
 import { Input } from '@medusajs/ui';
+import plugins from '../../../../common/plugins';
 
 
 export interface PDFDesignerRef {
@@ -13,15 +13,6 @@ type PDFDesignerProps = { template: Template, onTemplateChanged?: (template: Tem
 const PDFDesigner = forwardRef<PDFDesignerRef, PDFDesignerProps>(({ template, onTemplateChanged }, ref) => {
     const designerRef = useRef(null);
     const designerInstanceRef = useRef<Designer | null>(null);
-
-    const plugins = {
-        ...builtInPlugins,
-        ...barcodes,
-        Image: image,
-        Table: table,
-        multiVariableText,
-        svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
-    }
 
     useImperativeHandle(ref, () => ({
         getTemplate: () => {

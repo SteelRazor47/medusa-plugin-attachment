@@ -1,8 +1,8 @@
 import { Attachment } from "@medusajs/framework/types"
 import { createStep, createWorkflow, StepResponse, WorkflowResponse } from "@medusajs/framework/workflows-sdk"
 import { ATTACHMENT_MODULE, PdfTemplate } from "../modules/attachment"
-import { barcodes, builtInPlugins, checkbox, date, dateTime, ellipse, image, line, multiVariableText, radioGroup, rectangle, select, svg, table, time } from "@pdfme/schemas"
 import { generate } from "@pdfme/generator"
+import plugins from "../common/plugins"
 
 type CreatePdfAttachmentWorkflowInput = {
     filename: string,
@@ -23,15 +23,6 @@ const retrieveTemplateStep = createStep(
         return new StepResponse(template)
     }
 )
-
-const plugins = {
-    ...builtInPlugins,
-    ...barcodes,
-    Image: image,
-    Table: table,
-    multiVariableText,
-    svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
-}
 
 const generateContentStep = createStep(
     "generate-content",

@@ -1,75 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { Viewer } from '@pdfme/ui';
 import { Template } from '@pdfme/common';
-import { image, builtInPlugins, table, multiVariableText, barcodes, checkbox, date, dateTime, ellipse, line, radioGroup, rectangle, select, svg, time } from '@pdfme/schemas';
-import { sdk } from '../../../lib/sdk';
-import { useQuery } from '@tanstack/react-query';
+import plugins from '../../../../common/plugins';
 import { NestedRecord } from './page';
-
-const DEFAULT_PROPERTIES = [
-    "id",
-    "status",
-    "created_at",
-    "canceled_at",
-    "email",
-    "display_id",
-    "currency_code",
-    "metadata",
-    // --- TOTALS ---
-    "total",
-    "item_total",
-    "shipping_subtotal",
-    "subtotal",
-    "discount_total",
-    "discount_subtotal",
-    "shipping_total",
-    "shipping_tax_total",
-    "tax_total",
-    "refundable_total",
-    "order_change",
-]
-
-const DEFAULT_RELATIONS = [
-    "*customer",
-    "*items", // -> we get LineItem here with added `quantity` and `detail` which is actually an OrderItem (which is a parent object to LineItem in the DB)
-    "*items.variant",
-    "*items.variant.product",
-    "*items.variant.options",
-    "+items.variant.manage_inventory",
-    "*items.variant.inventory_items.inventory",
-    "+items.variant.inventory_items.required_quantity",
-    "+summary",
-    "*shipping_address",
-    "*billing_address",
-    "*sales_channel",
-    "*promotion",
-    "*shipping_methods",
-    "*fulfillments",
-    "+fulfillments.shipping_option.service_zone.fulfillment_set.type",
-    "*fulfillments.items",
-    "*fulfillments.labels",
-    "*fulfillments.labels",
-    "*payment_collections",
-    "*payment_collections.payments",
-    "*payment_collections.payments.refunds",
-    "*payment_collections.payments.refunds.refund_reason",
-    "region.automatic_taxes",
-]
-
-const DEFAULT_FIELDS = `${DEFAULT_PROPERTIES.join(",")},${DEFAULT_RELATIONS.join(",")}`
 
 const PDFViewer = ({ template, data }: { template: Template, data: NestedRecord<string, string | string[][]> }) => {
     const viewerRef = useRef(null);
     const viewerInstanceRef = useRef<Viewer | null>(null);
-
-    const plugins = {
-        ...builtInPlugins,
-        ...barcodes,
-        Image: image,
-        Table: table,
-        multiVariableText,
-        svg, line, rectangle, ellipse, dateTime, date, time, select, radioGroup, checkbox
-    }
 
     useEffect(() => {
         if (viewerInstanceRef.current) {

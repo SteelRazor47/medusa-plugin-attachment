@@ -86,10 +86,10 @@
     "pg": "^8.13.0"
   },
   "dependencies": {
-    "@pdfme/common": "^5.3.15",
-    "@pdfme/generator": "^5.3.15",
-    "@pdfme/schemas": "^5.3.15",
-    "@pdfme/ui": "^5.3.15"
+    "@pdfme/common": "^5.3.16",
+    "@pdfme/generator": "^5.3.16",
+    "@pdfme/schemas": "^5.3.16",
+    "@pdfme/ui": "^5.3.16"
   },
   "engines": {
     "node": ">=20"
